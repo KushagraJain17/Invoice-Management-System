@@ -1,0 +1,19 @@
+# Environment variables for MySQL configuration
+# Copy this file to .env and update with your MySQL credentials
+
+# Copy these to a local .env file (do NOT commit .env)
+
+# Flask Configuration
+SECRET_KEY=replace-with-a-long-random-string
+FLASK_DEBUG=False
+PREFERRED_URL_SCHEME=https
+SESSION_COOKIE_SECURE=True
+SESSION_COOKIE_SAMESITE=Lax
+
+# Optional: use a single DATABASE_URL for SQLAlchemy (otherwise SQLite file is used)
+# Example for PostgreSQL on Render/Cloud:
+# DATABASE_URL=postgresql+psycopg2://user:password@host:5432/dbname
+# Example for MySQL if you ever switch back:
+# DATABASE_URL=mysql+pymysql://user:password@host:3306/dbname
+# Example for SQLite absolute path (rare for cloud):
+# DATABASE_URL=sqlite:////opt/data/invoice.db

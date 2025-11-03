@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: invoice-management-system
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    autoDeploy: true
+    plan: free
+    healthCheckPath: /
+    envVars:
+      - key: FLASK_DEBUG
+        value: "False"
+      - key: SECRET_KEY
+        generateValue: true
+      # Optional: If you want a managed DB instead of SQLite, set DATABASE_URL
+      # - key: DATABASE_URL
+      #   value: "postgresql+psycopg2://user:pass@host:5432/dbname"
