@@ -2,16 +2,6 @@
 
 A modern invoice management system built with Python Flask that allows sellers to manage products and invoices. Features SQLite database by default for easy deployment and local development.
 
-## Live Demo
-**🚀 [View Live Demo](https://invoice-management-system-5u38.onrender.com)**
-
-**Note:** The app is hosted on Render's free tier, so the first request may take 50-60 seconds to load as the service spins up from sleep mode. Subsequent requests will be faster.
-
-*Note: This is a demo environment. Any data you create may be reset periodically.*
-
----
-
-
 ## Features
 
 ### Seller Dashboard
