@@ -154,28 +154,6 @@ The application creates the following tables:
 - **`invoice_items`**: ITEM_ID (PK), INVOICE_NO (FK), P_ID (FK), ITEM_QUANTITY, DISCOUNT
 - **`activities`**: Activity log for tracking user actions
 
-## API Endpoints
-
-- `GET /` - Redirects to login or appropriate dashboard
-- `GET/POST /login` - User login
-- `GET/POST /register` - User registration (seller only)
-- `GET /logout` - User logout
-- `GET /seller` - Seller dashboard
-- `GET /seller/products` - Product management page
-- `GET/POST /seller/products/add` - Add new product
-- `GET/POST /seller/products/edit/<id>` - Edit product
-- `GET /seller/products/delete/<id>` - Delete product
-- `POST /api/products/add` - API endpoint to add product from invoice page
-- `GET /seller/customers` - Customer management page
-- `GET/POST /seller/customers/add` - Add new customer
-- `GET/POST /seller/customers/edit/<id>` - Edit customer
-- `GET /seller/customers/<id>/invoices` - View customer's invoices
-- `GET /seller/invoices` - Invoice management page
-- `GET/POST /seller/invoices/create` - Create new invoice
-- `GET/POST /seller/invoices/edit/<id>` - Edit invoice
-- `GET /invoice/<id>` - View invoice details
-- `GET /invoice/<id>/download` - Download invoice as PDF
-
 ## Usage Guide For Sellers:
 
 1. **Register/Login** with seller credentials
