@@ -1,0 +1,66 @@
+{% extends "base.html" %} {% block title %}Verify OTP - Invoice Management
+System{% endblock %} {% block content %}
+<div class="auth-container">
+  <div class="auth-card">
+    <h1 class="auth-title">Verify Your Email</h1>
+    <p class="auth-subtitle">
+      We've sent a 4-digit OTP to <strong>{{ email }}</strong>
+    </p>
+    <p style="color: #666; font-size: 0.9em; margin-bottom: 20px">
+      Please check your email and enter the OTP below to complete your
+      registration.
+    </p>
+
+    <form method="POST" class="auth-form">
+      <div class="form-group">
+        <label class="form-label">Enter OTP</label>
+        <input
+          type="text"
+          name="otp"
+          class="form-input"
+          placeholder="Enter 4-digit OTP"
+          maxlength="4"
+          pattern="[0-9]{4}"
+          required
+          autocomplete="off"
+          style="text-align: center; font-size: 24px; letter-spacing: 8px"
+        />
+        <small style="color: #666; font-size: 0.85em"
+          >OTP is valid for 10 minutes</small
+        >
+      </div>
+
+      <button type="submit" class="btn btn-primary w-full justify-center">
+        Verify OTP
+      </button>
+    </form>
+
+    <div class="auth-switch" style="margin-top: 20px">
+      <p style="margin: 10px 0">
+        Didn't receive the OTP?
+        <a href="{{ url_for('register') }}">Register again</a>
+      </p>
+      <p>
+        Already have an account?
+        <a href="{{ url_for('login') }}">Sign in</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Auto-focus on OTP input
+  document.addEventListener("DOMContentLoaded", function () {
+    const otpInput = document.querySelector('input[name="otp"]');
+    if (otpInput) {
+      otpInput.focus();
+    }
+
+    // Only allow numbers
+    otpInput.addEventListener("input", function (e) {
+      this.value = this.value.replace(/[^0-9]/g, "");
+    });
+  });
+</script>
+{% endblock %}
+

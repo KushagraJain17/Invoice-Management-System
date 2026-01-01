@@ -1,0 +1,46 @@
+{% extends "base.html" %} {% block title %}Seller Dashboard - Invoice Management
+System{% endblock %} {% block content %}
+<div class="dashboard">
+  <div class="dashboard-header">
+    <p class="dashboard-subtitle">Welcome back, {{ session.user_name }}</p>
+  </div>
+
+  <div class="dashboard-stats">
+    <div class="stat-card">
+      <div class="stat-value">{{ stats.total_products }}</div>
+      <div class="stat-label">Total Products</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">{{ stats.total_customers }}</div>
+      <div class="stat-label">Total Customers</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">{{ stats.total_invoices }}</div>
+      <div class="stat-label">Total Invoices</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">{{ stats.paid_invoices }}</div>
+      <div class="stat-label">Paid Invoices</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">{{ stats.unpaid_invoices }}</div>
+      <div class="stat-label">Unpaid Invoices</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">{{ stats.overdue_invoices }}</div>
+      <div class="stat-label">Overdue Invoices</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">
+        ₹{{ "%.2f"|format(stats.revenue_collected) }}
+      </div>
+      <div class="stat-label">Revenue Collected</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-value">₹{{ "%.2f"|format(stats.revenue_due) }}</div>
+      <div class="stat-label">Revenue Due</div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

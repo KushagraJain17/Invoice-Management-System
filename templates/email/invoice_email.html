@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .invoice-header {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+      }
+      .invoice-header h2 {
+        margin: 0 0 10px 0;
+        color: #2563eb;
+      }
+      .invoice-details {
+        margin-bottom: 20px;
+      }
+      .invoice-details table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      .invoice-details th,
+      .invoice-details td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+      }
+      .invoice-details th {
+        background-color: #f8f9fa;
+        font-weight: bold;
+      }
+      .invoice-summary {
+        margin-top: 20px;
+        padding: 20px;
+        background-color: #f8f9fa;
+        border-radius: 8px;
+      }
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+      }
+      .summary-row.total {
+        font-weight: bold;
+        font-size: 1.2em;
+        border-top: 2px solid #333;
+        padding-top: 12px;
+        margin-top: 8px;
+      }
+      .status-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        border-radius: 4px;
+        font-size: 0.9em;
+        font-weight: bold;
+      }
+      .status-pending {
+        background-color: #fef3c7;
+        color: #92400e;
+      }
+      .status-paid {
+        background-color: #d1fae5;
+        color: #065f46;
+      }
+      .status-overdue {
+        background-color: #fee2e2;
+        color: #991b1b;
+      }
+      .status-cancelled {
+        background-color: #f3f4f6;
+        color: #374151;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="invoice-header">
+      <h2>Invoice {{ invoice.display_id }}</h2>
+      <p><strong>Date:</strong> {{ invoice.date }}</p>
+      {% if invoice.due_date_str %}
+      <p><strong>Due Date:</strong> {{ invoice.due_date_str }}</p>
+      {% endif %}
+      <p>
+        <strong>Status:</strong>
+        <span class="status-badge status-{{ invoice.status }}">
+          {{ invoice.status.title() }}
+        </span>
+      </p>
+    </div>
+
+    <div class="invoice-details">
+      <h3>Bill From:</h3>
+      <p><strong>{{ seller.s_name }}</strong></p>
+      {% if seller.s_email %}
+      <p>{{ seller.s_email }}</p>
+      {% endif %} {% if seller.s_phone %}
+      <p>Phone: {{ seller.s_phone }}</p>
+      {% endif %}
+    </div>
+
+    <div class="invoice-details">
+      <h3>Bill To:</h3>
+      <p><strong>{{ invoice.customer_name }}</strong></p>
+      <p>{{ invoice.customer_email }}</p>
+    </div>
+
+    <div class="invoice-items">
+      <h3>Items</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price (₹)</th>
+            <th>Discount (₹)</th>
+            <th>Total (₹)</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for item in invoice.invoice_items %}
+          <tr>
+            <td>{{ item.product_name }}</td>
+            <td>{{ item.item_quantity }}</td>
+            <td>₹{{ "%.2f"|format(item.price) }}</td>
+            <td>₹{{ "%.2f"|format(item.discount) }}</td>
+            <td>₹{{ "%.2f"|format(item.total) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="invoice-summary">
+      <div class="summary-row">
+        <span>Subtotal:</span>
+        <span>₹{{ "%.2f"|format(invoice.amount - invoice.tax) }}</span>
+      </div>
+      <div class="summary-row">
+        <span>Tax (10%):</span>
+        <span>₹{{ "%.2f"|format(invoice.tax) }}</span>
+      </div>
+      <div class="summary-row total">
+        <span>Total:</span>
+        <span>₹{{ "%.2f"|format(invoice.amount) }}</span>
+      </div>
+    </div>
+
+    <p style="margin-top: 30px; color: #666; font-size: 0.9em">
+      This is an automated email from Invoice Management System. Please do not
+      reply to this email.
+    </p>
+  </body>
+</html>
